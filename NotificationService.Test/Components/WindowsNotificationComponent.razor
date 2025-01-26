@@ -1,0 +1,40 @@
+﻿@using NotificationService.Abstractions.Model
+@using NotificationService.Abstractions.Model.Events
+
+@implements IDisposable
+
+@inject INotificationService NotificationService
+
+<button style="margin: .3rem" @onclick="Push">Push</button>
+@if(afterClickArgs is not null)
+{
+    <span>@afterClickArgs.Args</span>
+}
+@code {
+    private WindowsNotificationEventArgs afterClickArgs;
+
+    protected override void OnInitialized()
+    {
+        NotificationService.NotificationReacted += OnReacted;    
+    }
+
+    private async Task Push()
+    {
+        await NotificationService.PushNotification("Test", "From razor");
+    }
+
+    private void OnReacted(NotificationReactEventArgs args)
+    {
+        var currentArgs = args.GetCurrentArgs<WindowsNotificationEventArgs>();
+        if (currentArgs is null)
+            return;
+
+        afterClickArgs = currentArgs;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        NotificationService.NotificationReacted -= OnReacted;
+    }
+}

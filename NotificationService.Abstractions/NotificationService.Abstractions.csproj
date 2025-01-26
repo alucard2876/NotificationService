@@ -5,4 +5,23 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Update="Model\Events\AndroidNotificationEventArgs.cs">
+      <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+    </Compile>
+    <Compile Update="Model\Events\WindowsNotificationEventArgs.cs">
+      <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+    </Compile>
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Plugin.LocalNotification">
+	    <HintPath>..\..\..\..\N\plugin.localnotification\10.1.8\lib\net7.0-ios16.1\Plugin.LocalNotification.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
 </Project>

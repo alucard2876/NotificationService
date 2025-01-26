@@ -1,4 +1,7 @@
-﻿namespace NotificationService.Test;
+﻿using NotificationService.Abstractions.Model;
+using NotificationService.Test.Helpers;
+
+namespace NotificationService.Test;
 
 public partial class App : Application
 {
@@ -7,5 +10,10 @@ public partial class App : Application
         InitializeComponent();
 
         MainPage = new MainPage();
+    }
+
+    protected override void CleanUp()
+    {
+        ServiceProviderHelper.GetService<INotificationService>()?.Dispose();
     }
 }

@@ -26,6 +26,7 @@
 
         <!-- App Identifier -->
         <ApplicationId>com.companyname.notificationservice.test</ApplicationId>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

@@ -43,6 +43,7 @@ public static class MauiProgram
         var app = builder.Build();
 
         ServiceProviderHelper.PushServiceProvider(app.Services);
+        
 
         return app;
     }

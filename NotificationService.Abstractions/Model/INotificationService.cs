@@ -1,13 +1,16 @@
-﻿using System.Threading.Tasks;
+﻿using NotificationService.Abstractions.Model.Events;
+using System;
+using System.Threading.Tasks;
 
 namespace NotificationService.Abstractions.Model;
 
-public interface INotificationService
+public interface INotificationService : IDisposable
 {
+    event Action<NotificationReactEventArgs> NotificationReacted;
 
     Task Initialize(INotificationConfiguration configuration);
 
-    Task<object> PushNotification(string title, string message);
+    Task<bool> PushNotification(string title, string message);
 
-    Task<object> PushNotification(INotification notification);
+    Task<bool> PushNotification(INotification notification);
 }

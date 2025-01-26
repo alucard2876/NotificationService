@@ -1,0 +1,57 @@
+﻿@using NotificationService.Abstractions.Model
+@using NotificationService.Abstractions.Model.Enums
+@using NotificationService.Abstractions.Model.Events
+
+@implements IDisposable
+
+@inject INotificationService NotificationService
+
+<button style="margin: .3rem" @onclick="Push">Push</button>
+@if (afterClickArgs is not null)
+{
+    <span>@afterClickArgs.Type</span>
+    @switch (afterClickArgs.Type)
+    {
+        case NotificationType.Click:
+            <span>Click</span>
+            break;
+        case NotificationType.Activation:
+            <span>Activated</span>
+            break;
+        case NotificationType.Remove:
+            <span>Remove</span>
+            break;
+        case NotificationType.Recieved:
+            <span>Received</span>
+            break;
+    }
+}
+@code {
+    private AndroidNotificationEventArgs afterClickArgs;
+
+    protected override void OnInitialized()
+    {
+        NotificationService.NotificationReacted += OnReacted;
+    }
+
+    private async Task Push()
+    {
+        await NotificationService.PushNotification("Test", "From razor");
+    }
+
+    private void OnReacted(NotificationReactEventArgs args)
+    {
+        var currentArgs = args.GetCurrentArgs<AndroidNotificationEventArgs>();
+        if (currentArgs is null)
+            return;
+
+        afterClickArgs = currentArgs;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        NotificationService.NotificationReacted -= OnReacted;
+    }
+}
+#endif
