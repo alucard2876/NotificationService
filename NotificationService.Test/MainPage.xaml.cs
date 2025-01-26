@@ -10,4 +10,9 @@ public partial class MainPage : ContentPage
         InitializeComponent();
 
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        ServiceProviderHelper.GetService<INotificationService>()?.PushNotification("Test", "From xaml");
+    }
 }

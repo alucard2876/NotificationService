@@ -5,14 +5,14 @@ namespace NotificationService.Platforms.Windows.Extensions
 {
     internal static class WindowsServiceCollectionExtensions
     {
-        internal static IServiceCollection RegisterWindowsNotificationService(this IServiceCollection services, WindowsConfiguration configuration)
+        internal static IServiceCollection RegisterWindowsNotificationService(this MauiAppBuilder builder, WindowsConfiguration configuration)
         {
             INotificationService notificationService = new WindowsNotificationService();
             notificationService.Initialize(configuration);
 
-            services.AddSingleton<INotificationService>(notificationService);
+            builder.Services.AddSingleton<INotificationService>(notificationService);
 
-            return services;
+            return builder.Services;
         }
     }
 }

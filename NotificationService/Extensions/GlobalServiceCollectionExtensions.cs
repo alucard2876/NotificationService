@@ -12,16 +12,16 @@ namespace NotificationService.Extensions
 {
     public static class GlobalServiceCollectionExtensions
     {
-        public static IServiceCollection RegisterNotificationService(this IServiceCollection services, INotificationConfiguration configuration) 
+        public static IServiceCollection RegisterNotificationService(this MauiAppBuilder builder, INotificationConfiguration configuration) 
         {
 #if ANDROID
-            return services.RegisterAndroidNotifiactionService(configuration as AndroidConfiguration);
+            return builder.RegisterAndroidNotificationService(configuration as AndroidConfiguration);
 #endif
 #if WINDOWS
-           return services.RegisterWindowsNotificationService(configuration as WindowsConfiguration);
+           return builder.RegisterWindowsNotificationService(configuration as WindowsConfiguration);
 #endif
 
-            return services;
+            return builder.Services;
         }
     }
 }

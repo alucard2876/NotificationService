@@ -5,7 +5,12 @@
              x:Class="NotificationService.Test.MainPage">
 
     <Grid>
-        <BlazorWebView x:Name="blazorWebView" HostPage="wwwroot/index.html">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Margin="6" Text="Push" Clicked="Button_Clicked"/>
+        <BlazorWebView Grid.Row="1" x:Name="blazorWebView" HostPage="wwwroot/index.html">
             <BlazorWebView.RootComponents>
                 <RootComponent Selector="#app" ComponentType="{x:Type local:Components.Routes}" />
             </BlazorWebView.RootComponents>
